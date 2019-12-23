@@ -11,24 +11,36 @@
 #import <objc/runtime.h>
 #import <malloc/malloc.h>
 
-struct LGStruct1 {
-    char a;     // 1 + 7
-    double b;   // 8
+struct Struct2 {
+    double a;   // 8
+    char b;     // 1
     int c;      // 4
-    short d;    // 2 + 2
-} MyStruct1;
-
-struct LGStruct2 {
-    double b;   // 8
-    char a;     // 1 + 7
-    int c;      // 4 
     short d;    // 2
-} MyStruct2;
+} MyStruct2;  
+
+struct Struct3 {
+    double a;   // 8
+    int c;      // 4
+    char b;     // 1
+    short d;    // 2
+} MyStruct3;
+
+struct Struct4 {
+    NSString *a; // 8 
+    int b;       // 4  内存对齐为16
+} MyStruct4;
+
+struct Struct5  {
+    struct MyStruct4 x;   // 16
+    char y;               // 1
+    char t;               // 1
+    CGSize  z;            // 16  
+} MyStruct5;
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
         
-        NSLog(@"%lu-%lu",sizeof(MyStruct1),sizeof(MyStruct2));
+        NSLog(@"%lu-%lu",sizeof(MyStruct2),sizeof(MyStruct3));
         
         // size :
         // 1: 对象需要的内存空间 8倍数 - 8字节对齐
